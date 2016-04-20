@@ -11,7 +11,7 @@ unsigned __int64 simple_deposit(unsigned int deposit, unsigned __int16 term, flo
 	money = deposit * (1 + term*percent* / (100 * 365));
 	return money;
 }
-//Сложные проценты (с капитализацией)
+//Сложные проценты (с капитализацией) //rjvvtynfhbq
 unsigned __int64 capitalized_deposit(unsigned int deposit, unsigned __int16 term, float percent, unsigned __int8 capitalization, unsigned __int8 replenishment_period, unsigned int replenishment_amount){
 	unsigned __int64 money = 0;
 	unsigned int num_of_replenishment = term / replenishment_period;; //количество пополнений втечение срока
