@@ -37,15 +37,17 @@
             this.Value = new System.Windows.Forms.ComboBox();
             this.Итог = new System.Windows.Forms.Label();
             this.Capital = new System.Windows.Forms.ComboBox();
-            this.SumDepos = new System.Windows.Forms.TextBox();
-            this.Period = new System.Windows.Forms.TextBox();
-            this.Percent = new System.Windows.Forms.TextBox();
             this.Result = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip3 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip4 = new System.Windows.Forms.ToolTip(this.components);
+            this.Data = new System.Windows.Forms.NumericUpDown();
+            this.Percent = new System.Windows.Forms.ComboBox();
+            this.SumDepos = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.Data)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SumDepos)).BeginInit();
             this.SuspendLayout();
             // 
             // СрокВклада
@@ -134,28 +136,6 @@
             this.Capital.TabIndex = 10;
             this.Capital.Text = "В конце срока(без капитализации)";
             // 
-            // SumDepos
-            // 
-            this.SumDepos.Location = new System.Drawing.Point(34, 37);
-            this.SumDepos.Name = "SumDepos";
-            this.SumDepos.Size = new System.Drawing.Size(123, 20);
-            this.SumDepos.TabIndex = 11;
-            // 
-            // Period
-            // 
-            this.Period.Location = new System.Drawing.Point(33, 142);
-            this.Period.Name = "Period";
-            this.Period.Size = new System.Drawing.Size(125, 20);
-            this.Period.TabIndex = 12;
-            this.Period.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            // 
-            // Percent
-            // 
-            this.Percent.Location = new System.Drawing.Point(33, 194);
-            this.Percent.Name = "Percent";
-            this.Percent.Size = new System.Drawing.Size(210, 20);
-            this.Percent.TabIndex = 13;
-            // 
             // Result
             // 
             this.Result.Location = new System.Drawing.Point(218, 319);
@@ -172,16 +152,76 @@
             this.button1.Text = "Посчитать";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // Data
+            // 
+            this.Data.Location = new System.Drawing.Point(33, 143);
+            this.Data.Maximum = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+            this.Data.Name = "Data";
+            this.Data.Size = new System.Drawing.Size(123, 20);
+            this.Data.TabIndex = 18;
+            // 
+            // Percent
+            // 
+            this.Percent.FormattingEnabled = true;
+            this.Percent.Items.AddRange(new object[] {
+            "3.5",
+            "3.65",
+            "4.0",
+            "4.5",
+            "5.6",
+            "10.0",
+            "10.2",
+            "10.5",
+            "10.9",
+            "11.0",
+            "11.5",
+            "12.1"});
+            this.Percent.Location = new System.Drawing.Point(33, 194);
+            this.Percent.Name = "Percent";
+            this.Percent.Size = new System.Drawing.Size(209, 21);
+            this.Percent.TabIndex = 20;
+            // 
+            // SumDepos
+            // 
+            this.SumDepos.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.SumDepos.Location = new System.Drawing.Point(33, 36);
+            this.SumDepos.Maximum = new decimal(new int[] {
+            2000000,
+            0,
+            0,
+            0});
+            this.SumDepos.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.SumDepos.Name = "SumDepos";
+            this.SumDepos.Size = new System.Drawing.Size(124, 20);
+            this.SumDepos.TabIndex = 19;
+            this.SumDepos.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(435, 365);
+            this.Controls.Add(this.Percent);
+            this.Controls.Add(this.SumDepos);
+            this.Controls.Add(this.Data);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Result);
-            this.Controls.Add(this.Percent);
-            this.Controls.Add(this.Period);
-            this.Controls.Add(this.SumDepos);
             this.Controls.Add(this.Capital);
             this.Controls.Add(this.Итог);
             this.Controls.Add(this.Value);
@@ -193,6 +233,8 @@
             this.Name = "Form1";
             this.Text = "Банковский вклад";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.Data)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SumDepos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,15 +249,15 @@
         private System.Windows.Forms.ComboBox Value;
         private System.Windows.Forms.Label Итог;
         private System.Windows.Forms.ComboBox Capital;
-        private System.Windows.Forms.TextBox SumDepos;
-        private System.Windows.Forms.TextBox Period;
-        private System.Windows.Forms.TextBox Percent;
         private System.Windows.Forms.TextBox Result;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolTip toolTip2;
         private System.Windows.Forms.ToolTip toolTip3;
         private System.Windows.Forms.ToolTip toolTip4;
+        private System.Windows.Forms.NumericUpDown Data;
+        private System.Windows.Forms.ComboBox Percent;
+        private System.Windows.Forms.NumericUpDown SumDepos;
     }
 }
 
