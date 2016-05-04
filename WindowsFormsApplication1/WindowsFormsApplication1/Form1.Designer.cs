@@ -136,10 +136,12 @@
             // 
             // SumDepos
             // 
+            this.SumDepos.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.SumDepos.Location = new System.Drawing.Point(34, 37);
             this.SumDepos.Name = "SumDepos";
             this.SumDepos.Size = new System.Drawing.Size(123, 20);
             this.SumDepos.TabIndex = 11;
+            this.SumDepos.TextChanged += new System.EventHandler(this.SumDepos_TextChanged);
             // 
             // Period
             // 
