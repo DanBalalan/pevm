@@ -61,6 +61,7 @@ namespace Bank {
 	private: System::Windows::Forms::ComboBox^  Value;
 	private: System::Windows::Forms::ComboBox^  Percent;
 	private: System::Windows::Forms::ComboBox^  Capital;
+	private: System::Windows::Forms::TextBox^  textBox1;
 
 
 
@@ -93,6 +94,7 @@ namespace Bank {
 			this->Value = (gcnew System::Windows::Forms::ComboBox());
 			this->Percent = (gcnew System::Windows::Forms::ComboBox());
 			this->Capital = (gcnew System::Windows::Forms::ComboBox());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->SumDepos))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Data))->BeginInit();
 			this->SuspendLayout();
@@ -217,6 +219,16 @@ namespace Bank {
 			this->Capital->Size = System::Drawing::Size(121, 21);
 			this->Capital->TabIndex = 7;
 			this->Capital->Text = L"В конце срока(без капитализации0";
+			//this->Capital->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::Capital_SelectedIndexChanged);
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(114, 171);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(120, 20);
+			this->textBox1->TabIndex = 2;
+			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
+			this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::textBox1_KeyPress);
 			// 
 			// MyForm
 			// 
@@ -228,6 +240,7 @@ namespace Bank {
 			this->Controls->Add(this->Value);
 			this->Controls->Add(this->Label2);
 			this->Controls->Add(this->button1);
+			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->Result);
 			this->Controls->Add(this->Label5);
 			this->Controls->Add(this->Label4);
@@ -254,8 +267,19 @@ private: System::Void numericUpDown3_ValueChanged(System::Object^  sender, Syste
 private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-	int x = System::Convert::ToInt32(SumDepos->Value);
+	double x = System::Convert::ToDouble(textBox1->Text);
 	Result ->Text = System::Convert::ToString(x);
+}
+private: System::Void textBox1_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+	if (!(Char::IsDigit(e->KeyChar)) && !((e->KeyChar == ',') &&
+		((textBox1->Text->IndexOf(",") == -1) &&
+		((textBox1->Text->Length != 0)))))
+	{
+		if (e->KeyChar != (char)Keys::Back)
+		{
+			e->Handled = true;
+		}
+	}
 }
 };
 }
