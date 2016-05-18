@@ -35,12 +35,13 @@ namespace Bank {
 			}
 		}
 	private: System::Windows::Forms::Label^  Label1;
-	private: System::Windows::Forms::NumericUpDown^  SumDepos;
+
 	private: System::Windows::Forms::Label^  Label3;
 	private: System::Windows::Forms::NumericUpDown^  Data;
 	private: System::Windows::Forms::Label^  Label4;
 	private: System::Windows::Forms::Label^  Label5;
-	private: System::Windows::Forms::TextBox^  Result;
+	private: System::Windows::Forms::TextBox^  Value2;
+
 	protected:
 
 	protected:
@@ -59,9 +60,13 @@ namespace Bank {
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Label^  Label2;
 	private: System::Windows::Forms::ComboBox^  Value;
-	private: System::Windows::Forms::ComboBox^  Percent;
+
 	private: System::Windows::Forms::ComboBox^  Capital;
-	private: System::Windows::Forms::TextBox^  textBox1;
+	private: System::Windows::Forms::TextBox^  SumDepos;
+	private: System::Windows::Forms::TextBox^  Percent;
+	private: System::Windows::Forms::TextBox^  Result;
+
+
 
 
 
@@ -83,19 +88,18 @@ namespace Bank {
 		void InitializeComponent(void)
 		{
 			this->Label1 = (gcnew System::Windows::Forms::Label());
-			this->SumDepos = (gcnew System::Windows::Forms::NumericUpDown());
 			this->Label3 = (gcnew System::Windows::Forms::Label());
 			this->Data = (gcnew System::Windows::Forms::NumericUpDown());
 			this->Label4 = (gcnew System::Windows::Forms::Label());
 			this->Label5 = (gcnew System::Windows::Forms::Label());
-			this->Result = (gcnew System::Windows::Forms::TextBox());
+			this->Value2 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->Label2 = (gcnew System::Windows::Forms::Label());
 			this->Value = (gcnew System::Windows::Forms::ComboBox());
-			this->Percent = (gcnew System::Windows::Forms::ComboBox());
 			this->Capital = (gcnew System::Windows::Forms::ComboBox());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->SumDepos))->BeginInit();
+			this->SumDepos = (gcnew System::Windows::Forms::TextBox());
+			this->Percent = (gcnew System::Windows::Forms::TextBox());
+			this->Result = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Data))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -108,16 +112,6 @@ namespace Bank {
 			this->Label1->TabIndex = 0;
 			this->Label1->Text = L"Сумма вклада:";
 			this->Label1->Click += gcnew System::EventHandler(this, &MyForm::label1_Click);
-			// 
-			// SumDepos
-			// 
-			this->SumDepos->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1000, 0, 0, 0 });
-			this->SumDepos->Location = System::Drawing::Point(240, 6);
-			this->SumDepos->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1000000, 0, 0, 0 });
-			this->SumDepos->Name = L"SumDepos";
-			this->SumDepos->Size = System::Drawing::Size(120, 20);
-			this->SumDepos->TabIndex = 1;
-			this->SumDepos->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1000, 0, 0, 0 });
 			// 
 			// Label3
 			// 
@@ -156,13 +150,13 @@ namespace Bank {
 			this->Label5->TabIndex = 0;
 			this->Label5->Text = L"Начисление процентов(капитализация):";
 			// 
-			// Result
+			// Value2
 			// 
-			this->Result->Location = System::Drawing::Point(240, 171);
-			this->Result->Name = L"Result";
-			this->Result->Size = System::Drawing::Size(120, 20);
-			this->Result->TabIndex = 2;
-			this->Result->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
+			this->Value2->Location = System::Drawing::Point(298, 171);
+			this->Value2->Name = L"Value2";
+			this->Value2->Size = System::Drawing::Size(50, 20);
+			this->Value2->TabIndex = 2;
+			this->Value2->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			// 
 			// button1
 			// 
@@ -194,19 +188,6 @@ namespace Bank {
 			this->Value->TabIndex = 5;
 			this->Value->Text = L"руб";
 			// 
-			// Percent
-			// 
-			this->Percent->FormattingEnabled = true;
-			this->Percent->Items->AddRange(gcnew cli::array< System::Object^  >(12) {
-				L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9",
-					L"10", L"11", L"12"
-			});
-			this->Percent->Location = System::Drawing::Point(240, 88);
-			this->Percent->Name = L"Percent";
-			this->Percent->Size = System::Drawing::Size(121, 21);
-			this->Percent->TabIndex = 6;
-			this->Percent->Text = L"1";
-			// 
 			// Capital
 			// 
 			this->Capital->FormattingEnabled = true;
@@ -219,16 +200,32 @@ namespace Bank {
 			this->Capital->Size = System::Drawing::Size(121, 21);
 			this->Capital->TabIndex = 7;
 			this->Capital->Text = L"В конце срока(без капитализации0";
-			//this->Capital->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::Capital_SelectedIndexChanged);
 			// 
-			// textBox1
+			// SumDepos
 			// 
-			this->textBox1->Location = System::Drawing::Point(114, 171);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(120, 20);
-			this->textBox1->TabIndex = 2;
-			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
-			this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::textBox1_KeyPress);
+			this->SumDepos->Location = System::Drawing::Point(240, 6);
+			this->SumDepos->Name = L"SumDepos";
+			this->SumDepos->Size = System::Drawing::Size(120, 20);
+			this->SumDepos->TabIndex = 2;
+			this->SumDepos->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
+			this->SumDepos->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::SumDepos_KeyPress);
+			// 
+			// Percent
+			// 
+			this->Percent->Location = System::Drawing::Point(240, 89);
+			this->Percent->Name = L"Percent";
+			this->Percent->Size = System::Drawing::Size(120, 20);
+			this->Percent->TabIndex = 2;
+			this->Percent->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
+			this->Percent->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::SumDepos_KeyPress);
+			// 
+			// Result
+			// 
+			this->Result->Location = System::Drawing::Point(172, 171);
+			this->Result->Name = L"Result";
+			this->Result->Size = System::Drawing::Size(120, 20);
+			this->Result->TabIndex = 2;
+			this->Result->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			// 
 			// MyForm
 			// 
@@ -236,21 +233,20 @@ namespace Bank {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(377, 226);
 			this->Controls->Add(this->Capital);
-			this->Controls->Add(this->Percent);
 			this->Controls->Add(this->Value);
 			this->Controls->Add(this->Label2);
 			this->Controls->Add(this->button1);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->Percent);
+			this->Controls->Add(this->SumDepos);
 			this->Controls->Add(this->Result);
+			this->Controls->Add(this->Value2);
 			this->Controls->Add(this->Label5);
 			this->Controls->Add(this->Label4);
 			this->Controls->Add(this->Data);
 			this->Controls->Add(this->Label3);
-			this->Controls->Add(this->SumDepos);
 			this->Controls->Add(this->Label1);
 			this->Name = L"MyForm";
 			this->Text = L"Калькулятор вклада";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->SumDepos))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Data))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -267,13 +263,13 @@ private: System::Void numericUpDown3_ValueChanged(System::Object^  sender, Syste
 private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-	double x = System::Convert::ToDouble(textBox1->Text);
+	double x = System::Convert::ToDouble(SumDepos->Text);
 	Result ->Text = System::Convert::ToString(x);
 }
-private: System::Void textBox1_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+private: System::Void SumDepos_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
 	if (!(Char::IsDigit(e->KeyChar)) && !((e->KeyChar == ',') &&
-		((textBox1->Text->IndexOf(",") == -1) &&
-		((textBox1->Text->Length != 0)))))
+		((SumDepos->Text->IndexOf(",") == -1) &&
+		((SumDepos->Text->Length != 0)))))
 	{
 		if (e->KeyChar != (char)Keys::Back)
 		{
