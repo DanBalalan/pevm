@@ -1,5 +1,6 @@
 #pragma once
 #include <msclr\marshal_cppstd.h>
+#include <string>
 namespace Bank {
 
 	using namespace System;
@@ -263,9 +264,13 @@ private: System::Void numericUpDown3_ValueChanged(System::Object^  sender, Syste
 private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-	double x = System::Convert::ToDouble(SumDepos->Text);
-	Result ->Text = System::Convert::ToString(x);
+	double sum = System::Convert::ToDouble(SumDepos->Text);
+	int data = System::Convert::ToInt32(Data->Text);
+	double perc = System::Convert::ToDouble(Data->Text) , result;
+	Value2->Text = Value -> Text;
+	Result ->Text = System::Convert::ToString(sum);//заменить на result
 }
+		 //проверка на ввод
 private: System::Void SumDepos_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
 	if (!(Char::IsDigit(e->KeyChar)) && !((e->KeyChar == ',') &&
 		((SumDepos->Text->IndexOf(",") == -1) &&
