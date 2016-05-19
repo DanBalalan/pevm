@@ -195,7 +195,7 @@ namespace Bank {
 			this->Capital->FormattingEnabled = true;
 			this->Capital->Items->AddRange(gcnew cli::array< System::Object^  >(5) {
 				L"В конце срока(без капитализации)", L"Ежемесячно",
-					L"Раз в 2 месяца", L"Раз в 3 месяца", L"Раз в пол года"
+					L"1 раз в 2 месяца", L"1 раз в 3 месяца", L"1 раз в пол года"
 			});
 			this->Capital->Location = System::Drawing::Point(240, 115);
 			this->Capital->Name = L"Capital";
@@ -276,27 +276,7 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	perc = System::Convert::ToDouble(Percent->Text);
 	cap = msclr::interop::marshal_as<std::string>(Capital->Text); 
 	Value2->Text = Value -> Text;
-<<<<<<< HEAD
 	Result ->Text = System::Convert::ToString(result);
-=======
-	unsigned __int8 cap = 0; //период капитализации
-	/*int index0 = Capital->FindString("В конце срока(без капитализации)");
-	int index1 = Capital->FindString("Ежемесячно");
-	int index2 = Capital->FindString("Раз в 2 месяца");
-	int index3 = Capital->FindString("Раз в 3 месяца");
-	int index4 = Capital->FindString("Раз в пол года"); */
-	switch (Capital->SelectedIndex)
-	{
-	case 0: cap = 0;
-	case 1: cap = 1;
-	case 2: cap = 2;
-	case 3: cap = 3;
-	case 4: cap = 6;
-	}
-	
-	//Value2->Text = System::Convert::ToString(cap);
-	Result ->Text = System::Convert::ToString(sum);//заменить на result 
->>>>>>> origin/master
 }
 		 //проверка на ввод
 private: System::Void SumDepos_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
