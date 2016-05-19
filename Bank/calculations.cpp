@@ -14,7 +14,7 @@ unsigned __int64 money = result;
 unsigned __int8 capitalization = cap;
 
 //Простые проценты (без капитализации)
-unsigned __int64 simple_deposit(unsigned int deposit, unsigned __int16 term, float percent){
+double simple_deposit(double deposit, unsigned __int16 term, double percent){
 	unsigned __int64 money = 0;
 	money = deposit * (1 + term*percent / (100 * 365));
 	return money;
