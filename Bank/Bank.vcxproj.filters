@@ -18,7 +18,7 @@
     <ClCompile Include="MyForm.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="calculations.cpp">
+    <ClCompile Include="E:\Project1\pevm\Bank\calculations.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>

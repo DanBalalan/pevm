@@ -9,4 +9,5 @@ void Main(array<String^>^ args) {
 	Application::SetCompatibleTextRenderingDefault(false);
 	Bank::MyForm MyForm;
 	Application::Run(%MyForm);
+
 }

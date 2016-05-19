@@ -1,8 +1,9 @@
 #pragma once
 #include <msclr\marshal_cppstd.h>
 #include <string>
-namespace Bank {
 
+namespace Bank {
+	using namespace std;
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -66,8 +67,6 @@ namespace Bank {
 	private: System::Windows::Forms::TextBox^  SumDepos;
 	private: System::Windows::Forms::TextBox^  Percent;
 	private: System::Windows::Forms::TextBox^  Result;
-
-
 
 
 
@@ -266,11 +265,18 @@ private: System::Void numericUpDown3_ValueChanged(System::Object^  sender, Syste
 private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-	double sum = System::Convert::ToDouble(SumDepos->Text);
-	int data = System::Convert::ToInt32(Data->Text);
-	double perc = System::Convert::ToDouble(Data->Text) , result;
+	extern double sum; //сумма вклада
+	extern int data; //срок
+	extern double perc, //проценты
+		result; 
+	extern string cap; //капитализация
+
+	sum = System::Convert::ToDouble(SumDepos->Text);
+	data = System::Convert::ToInt32(Data->Text);
+	perc = System::Convert::ToDouble(Percent->Text);
+	cap = msclr::interop::marshal_as<std::string>(Capital->Text); 
 	Value2->Text = Value -> Text;
-	Result ->Text = System::Convert::ToString(sum);//заменить на result
+	Result ->Text = System::Convert::ToString(result);
 }
 		 //проверка на ввод
 private: System::Void SumDepos_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
