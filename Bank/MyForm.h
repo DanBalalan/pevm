@@ -194,6 +194,7 @@ namespace Bank {
 			this->SumDepos->Name = L"SumDepos";
 			this->SumDepos->Size = System::Drawing::Size(120, 20);
 			this->SumDepos->TabIndex = 2;
+			this->SumDepos->Text = L"0";
 			this->SumDepos->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			this->SumDepos->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::SumDepos_KeyPress);
 			// 
@@ -203,8 +204,9 @@ namespace Bank {
 			this->Percent->Name = L"Percent";
 			this->Percent->Size = System::Drawing::Size(120, 20);
 			this->Percent->TabIndex = 2;
+			this->Percent->Text = L"0";
 			this->Percent->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
-			this->Percent->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::SumDepos_KeyPress);
+			this->Percent->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::Percent_KeyPress);
 			// 
 			// Result
 			// 
@@ -315,11 +317,23 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	result = count_my_money(sum,data,perc,capitalization);
 	Result ->Text = System::Convert::ToString(result);
 }
-		 //проверка на ввод
+		 //проверка на ввод суммы вклада
 private: System::Void SumDepos_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
 	if (!(Char::IsDigit(e->KeyChar)) && !((e->KeyChar == ',') &&
 		((SumDepos->Text->IndexOf(",") == -1) &&
 		((SumDepos->Text->Length != 0)))))
+	{
+		if (e->KeyChar != (char)Keys::Back)
+		{
+			e->Handled = true;
+		}
+	}
+}
+		 //проверка на ввод процентов
+private: System::Void Percent_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+	if (!(Char::IsDigit(e->KeyChar)) && !((e->KeyChar == ',') &&
+		((Percent->Text->IndexOf(",") == -1) &&
+		((Percent->Text->Length != 0)))))
 	{
 		if (e->KeyChar != (char)Keys::Back)
 		{
