@@ -57,6 +57,7 @@ namespace Bank {
 	private: System::Windows::Forms::TextBox^  SumDepos;
 	private: System::Windows::Forms::TextBox^  Percent;
 	private: System::Windows::Forms::TextBox^  Result;
+	private: System::Windows::Forms::Label^  label6;
 
 	protected:
 
@@ -86,6 +87,7 @@ namespace Bank {
 			this->SumDepos = (gcnew System::Windows::Forms::TextBox());
 			this->Percent = (gcnew System::Windows::Forms::TextBox());
 			this->Result = (gcnew System::Windows::Forms::TextBox());
+			this->label6 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Data))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -138,7 +140,7 @@ namespace Bank {
 			// 
 			// Value2
 			// 
-			this->Value2->Location = System::Drawing::Point(298, 171);
+			this->Value2->Location = System::Drawing::Point(274, 172);
 			this->Value2->Name = L"Value2";
 			this->Value2->Size = System::Drawing::Size(50, 20);
 			this->Value2->TabIndex = 2;
@@ -146,7 +148,7 @@ namespace Bank {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(20, 171);
+			this->button1->Location = System::Drawing::Point(148, 212);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 3;
@@ -159,9 +161,9 @@ namespace Bank {
 			this->Label2->AutoSize = true;
 			this->Label2->Location = System::Drawing::Point(11, 36);
 			this->Label2->Name = L"Label2";
-			this->Label2->Size = System::Drawing::Size(84, 13);
+			this->Label2->Size = System::Drawing::Size(87, 13);
 			this->Label2->TabIndex = 4;
-			this->Label2->Text = L"Валюта вклада";
+			this->Label2->Text = L"Валюта вклада:";
 			// 
 			// Value
 			// 
@@ -210,17 +212,27 @@ namespace Bank {
 			// 
 			// Result
 			// 
-			this->Result->Location = System::Drawing::Point(172, 171);
+			this->Result->Location = System::Drawing::Point(148, 172);
 			this->Result->Name = L"Result";
 			this->Result->Size = System::Drawing::Size(120, 20);
 			this->Result->TabIndex = 2;
 			this->Result->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Location = System::Drawing::Point(13, 179);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(112, 13);
+			this->label6->TabIndex = 8;
+			this->label6->Text = L"Доход по вложению:";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(377, 226);
+			this->ClientSize = System::Drawing::Size(377, 260);
+			this->Controls->Add(this->label6);
 			this->Controls->Add(this->Capital);
 			this->Controls->Add(this->Value);
 			this->Controls->Add(this->Label2);
