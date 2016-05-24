@@ -1,4 +1,4 @@
-﻿Сборка начата 25.05.2016 0:28:26.
+﻿Сборка начата 25.05.2016 0:46:44.
      1>Проект "C:\Users\Dan\Google Диск\Учёба\2 курс\Практикум на ЭВМ\2 семестр\GitHub\pevm\Bank\Bank.vcxproj" в узле 2 (целевые объекты Build).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Bank (1).vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -16,4 +16,4 @@
 
 Сборка успешно завершена.
 
-Затраченное время: 00:00:01.60
+Затраченное время: 00:00:01.66

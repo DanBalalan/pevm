@@ -316,7 +316,7 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	if (cap == cap3) capitalization = 3;
 	if (cap == cap6) capitalization = 6;
 	result = count_my_money(sum,data,perc,capitalization);
-	Result ->Text = System::Convert::ToString(result);
+	Result ->Text = System::Convert::ToString(round(result*100)/100);
 }
 		 //проверка на ввод суммы вклада
 private: System::Void SumDepos_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
