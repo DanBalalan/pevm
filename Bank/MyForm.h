@@ -270,14 +270,14 @@ private: System::Void textBox1_TextChanged(System::Object^  sender, System::Even
 		 //Простые проценты (без капитализации)
 		 unsigned __int64 simple_deposit(unsigned int deposit, unsigned __int16 term, float percent){
 			 unsigned __int64 money = 0;
-			 money = deposit * (1 + term*percent / (100 * 365));
+			 money = deposit + (deposit*percent*term/ 12 / 100);
 			 return money;
 		 }
 		 //Сложные проценты (с капитализацией)
 		 double capitalized_deposit(double deposit, unsigned __int16 term, double percent, int capitalization){
 			 double money = 0;
 			 unsigned int num_of_cap = unsigned int(term / capitalization); //количество периодов капитализации
-			 money = deposit * pow(1 + capitalization * 30 * percent / (100 * 365), num_of_cap);
+			 money = deposit * pow(1 + capitalization * percent / (100 * 12), num_of_cap);
 			 return money;
 		 }
 
@@ -302,6 +302,7 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	sum = System::Convert::ToDouble(SumDepos->Text);
 	data = System::Convert::ToInt32(Data->Text);
 	perc = System::Convert::ToDouble(Percent->Text);
+	if (perc > 100) perc = 100;
 	cap = msclr::interop::marshal_as<std::string>(Capital->Text); 
 	Value2->Text = Value -> Text;
 	string cap0 = "В конце срока(без капитализации)";
