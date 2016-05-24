@@ -329,6 +329,16 @@ private: System::Void SumDepos_KeyPress(System::Object^  sender, System::Windows
 			e->Handled = true;
 		}
 	}
+	if (SumDepos->Text->IndexOf(",") > 0)
+	{
+		if (SumDepos->Text->Substring(SumDepos->Text->IndexOf(","))->Length > 2)
+		{
+			if (e->KeyChar != (char)Keys::Back)
+			{
+				e->Handled = true;
+			}
+		}
+	}
 }
 		 //проверка на ввод процентов
 private: System::Void Percent_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
@@ -339,6 +349,16 @@ private: System::Void Percent_KeyPress(System::Object^  sender, System::Windows:
 		if (e->KeyChar != (char)Keys::Back)
 		{
 			e->Handled = true;
+		}
+	}
+	if (Percent->Text->IndexOf(",") > 0)
+	{
+		if (Percent->Text->Substring(Percent->Text->IndexOf(","))->Length > 2)
+		{
+			if (e->KeyChar != (char)Keys::Back)
+			{
+				e->Handled = true;
+			}
 		}
 	}
 }
