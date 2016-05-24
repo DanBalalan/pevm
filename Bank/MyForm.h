@@ -1,6 +1,7 @@
 #pragma once
 #include <msclr\marshal_cppstd.h>
 #include <string>
+#include <cstring> //для сравнения строк
 
 namespace Bank {
 	using namespace std;
@@ -48,17 +49,6 @@ namespace Bank {
 
 	protected:
 
-
-
-
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Label^  Label2;
 	private: System::Windows::Forms::ComboBox^  Value;
@@ -67,12 +57,6 @@ namespace Bank {
 	private: System::Windows::Forms::TextBox^  SumDepos;
 	private: System::Windows::Forms::TextBox^  Percent;
 	private: System::Windows::Forms::TextBox^  Result;
-
-
-
-
-
-
 
 	protected:
 
@@ -201,7 +185,8 @@ namespace Bank {
 			this->Capital->Name = L"Capital";
 			this->Capital->Size = System::Drawing::Size(121, 21);
 			this->Capital->TabIndex = 7;
-			this->Capital->Text = L"В конце срока(без капитализации0";
+			this->Capital->Text = L"В конце срока(без капитализации)";
+			this->Capital->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::Capital_SelectedIndexChanged);
 			// 
 			// SumDepos
 			// 
@@ -264,18 +249,70 @@ private: System::Void numericUpDown3_ValueChanged(System::Object^  sender, Syste
 }
 private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 }
+		 /*Рассчёты*/
+#include <string>
+#include <math.h>
+
+		 //deposit - сумма вклада; term - срок вклада; percent - процентная ставка; 
+		 //capitalization - срок начисления процентов (в месяцах);
+		 /*double sum; //сумма вклада
+		 int data; //срок
+		 double perc, result;
+
+		 unsigned int deposit = sum;
+		 unsigned __int16 term = data;
+		 float percent = perc;
+		 unsigned __int64 money = result;
+		 unsigned __int8 capitalization = cap;*/
+
+		 //Простые проценты (без капитализации)
+		 unsigned __int64 simple_deposit(unsigned int deposit, unsigned __int16 term, float percent){
+			 unsigned __int64 money = 0;
+			 money = deposit * (1 + term*percent / (100 * 365));
+			 return money;
+		 }
+		 //Сложные проценты (с капитализацией)
+		 double capitalized_deposit(double deposit, unsigned __int16 term, double percent, int capitalization){
+			 double money = 0;
+			 unsigned int num_of_cap = unsigned int(term / capitalization); //количество периодов капитализации
+			 money = deposit * pow(1 + capitalization * 30 * percent / (100 * 365), num_of_cap);
+			 return money;
+		 }
+
+		 double count_my_money(double deposit, unsigned __int16 term, double percent, int capitalization)
+		 {
+			 double money = 0;
+			 if (capitalization == 0)
+				 money = simple_deposit(deposit, term, percent);
+			 else money = capitalized_deposit(deposit, term, percent, capitalization);
+			 return money;
+		 }
+		 /*Рассчёты.*/
+		 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-	extern double sum; //сумма вклада
-	extern int data; //срок
-	extern double perc, //проценты
+	double sum; //сумма вклада
+	int data; //срок
+	int	capitalization = 0;
+	double perc, //проценты
 		result; 
-	extern string cap; //капитализация
+	string cap; //капитализация
 
 	sum = System::Convert::ToDouble(SumDepos->Text);
 	data = System::Convert::ToInt32(Data->Text);
 	perc = System::Convert::ToDouble(Percent->Text);
 	cap = msclr::interop::marshal_as<std::string>(Capital->Text); 
 	Value2->Text = Value -> Text;
+	string cap0 = "В конце срока(без капитализации)";
+	string cap1 = "Ежемесячно";
+	string cap2 = "1 раз в 2 месяца";
+	string cap3 = "1 раз в 3 месяца";
+	string cap6 = "1 раз в пол года";
+	if (cap == cap0) capitalization = 0;
+	if (cap == cap1) capitalization = 1;
+	if (cap == cap2) capitalization = 2;
+	if (cap == cap3) capitalization = 3;
+	if (cap == cap6) capitalization = 6;
+	result = count_my_money(sum,data,perc,capitalization);
 	Result ->Text = System::Convert::ToString(result);
 }
 		 //проверка на ввод
@@ -289,6 +326,8 @@ private: System::Void SumDepos_KeyPress(System::Object^  sender, System::Windows
 			e->Handled = true;
 		}
 	}
+}
+private: System::Void Capital_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 }
 };
 }
