@@ -38,28 +38,18 @@ namespace Bank {
 			}
 		}
 	private: System::Windows::Forms::Label^  Label1;
-
 	private: System::Windows::Forms::Label^  Label3;
 	private: System::Windows::Forms::NumericUpDown^  Data;
 	private: System::Windows::Forms::Label^  Label4;
 	private: System::Windows::Forms::Label^  Label5;
 	private: System::Windows::Forms::TextBox^  Value2;
-
-	protected:
-
-	protected:
-
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Label^  Label2;
 	private: System::Windows::Forms::ComboBox^  Value;
-
 	private: System::Windows::Forms::ComboBox^  Capital;
 	private: System::Windows::Forms::TextBox^  SumDepos;
 	private: System::Windows::Forms::TextBox^  Percent;
 	private: System::Windows::Forms::TextBox^  Result;
-
-	protected:
-
 	private:
 		/// <summary>
 		/// Требуется переменная конструктора.
@@ -97,7 +87,6 @@ namespace Bank {
 			this->Label1->Size = System::Drawing::Size(83, 13);
 			this->Label1->TabIndex = 0;
 			this->Label1->Text = L"Сумма вклада:";
-			this->Label1->Click += gcnew System::EventHandler(this, &MyForm::label1_Click);
 			// 
 			// Label3
 			// 
@@ -142,7 +131,6 @@ namespace Bank {
 			this->Value2->Name = L"Value2";
 			this->Value2->Size = System::Drawing::Size(50, 20);
 			this->Value2->TabIndex = 2;
-			this->Value2->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			// 
 			// button1
 			// 
@@ -186,7 +174,6 @@ namespace Bank {
 			this->Capital->Size = System::Drawing::Size(121, 21);
 			this->Capital->TabIndex = 7;
 			this->Capital->Text = L"В конце срока(без капитализации)";
-			this->Capital->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::Capital_SelectedIndexChanged);
 			// 
 			// SumDepos
 			// 
@@ -195,7 +182,6 @@ namespace Bank {
 			this->SumDepos->Size = System::Drawing::Size(120, 20);
 			this->SumDepos->TabIndex = 2;
 			this->SumDepos->Text = L"0";
-			this->SumDepos->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			this->SumDepos->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::SumDepos_KeyPress);
 			// 
 			// Percent
@@ -205,7 +191,6 @@ namespace Bank {
 			this->Percent->Size = System::Drawing::Size(120, 20);
 			this->Percent->TabIndex = 2;
 			this->Percent->Text = L"0";
-			this->Percent->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			this->Percent->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::Percent_KeyPress);
 			// 
 			// Result
@@ -214,7 +199,6 @@ namespace Bank {
 			this->Result->Name = L"Result";
 			this->Result->Size = System::Drawing::Size(120, 20);
 			this->Result->TabIndex = 2;
-			this->Result->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			// 
 			// MyForm
 			// 
@@ -242,33 +226,14 @@ namespace Bank {
 
 		}
 #pragma endregion
-
-private: System::Void numericUpDown4_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
-	}
-private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
-}
-private: System::Void numericUpDown3_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
-}
-private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
-}
 		 /*Рассчёты*/
 #include <string>
 #include <math.h>
 
 		 //deposit - сумма вклада; term - срок вклада; percent - процентная ставка; 
 		 //capitalization - срок начисления процентов (в месяцах);
-		 /*double sum; //сумма вклада
-		 int data; //срок
-		 double perc, result;
-
-		 unsigned int deposit = sum;
-		 unsigned __int16 term = data;
-		 float percent = perc;
-		 unsigned __int64 money = result;
-		 unsigned __int8 capitalization = cap;*/
-
 		 //Простые проценты (без капитализации)
-		 unsigned __int64 simple_deposit(unsigned int deposit, unsigned __int16 term, float percent){
+		 double simple_deposit(unsigned int deposit, unsigned __int16 term, float percent){
 			 unsigned __int64 money = 0;
 			 money = deposit + (deposit*percent*term/ 12 / 100);
 			 return money;
@@ -280,7 +245,7 @@ private: System::Void textBox1_TextChanged(System::Object^  sender, System::Even
 			 money = deposit * pow(1 + capitalization * percent / (100 * 12), num_of_cap);
 			 return money;
 		 }
-
+		 //Основная функция рассчёта суммы вклада
 		 double count_my_money(double deposit, unsigned __int16 term, double percent, int capitalization)
 		 {
 			 double money = 0;
@@ -289,7 +254,7 @@ private: System::Void textBox1_TextChanged(System::Object^  sender, System::Even
 			 else money = capitalized_deposit(deposit, term, percent, capitalization);
 			 return money;
 		 }
-		 /*Рассчёты.*/
+		 /*Рассчёты.Конец*/
 		 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 	double sum; //сумма вклада
@@ -297,13 +262,13 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	int	capitalization = 0;
 	double perc, //проценты
 		result; 
-	string cap; //капитализация
+	string cap; //капитализация(строка)
 
 	sum = System::Convert::ToDouble(SumDepos->Text);
 	data = System::Convert::ToInt32(Data->Text);
 	perc = System::Convert::ToDouble(Percent->Text);
 	if (perc > 100) perc = 100;
-	cap = msclr::interop::marshal_as<std::string>(Capital->Text); 
+	cap = msclr::interop::marshal_as<std::string>(Capital->Text); //Взяли строку из комбобокса
 	Value2->Text = Value -> Text;
 	string cap0 = "В конце срока(без капитализации)";
 	string cap1 = "Ежемесячно";
@@ -320,6 +285,7 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 }
 		 //проверка на ввод суммы вклада
 private: System::Void SumDepos_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+	//ввод только цифр и запятой
 	if (!(Char::IsDigit(e->KeyChar)) && !((e->KeyChar == ',') &&
 		((SumDepos->Text->IndexOf(",") == -1) &&
 		((SumDepos->Text->Length != 0)))))
@@ -329,6 +295,7 @@ private: System::Void SumDepos_KeyPress(System::Object^  sender, System::Windows
 			e->Handled = true;
 		}
 	}
+	//не более 2 знаков после запятой
 	if (SumDepos->Text->IndexOf(",") > 0)
 	{
 		if (SumDepos->Text->Substring(SumDepos->Text->IndexOf(","))->Length > 2)
@@ -361,8 +328,6 @@ private: System::Void Percent_KeyPress(System::Object^  sender, System::Windows:
 			}
 		}
 	}
-}
-private: System::Void Capital_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 }
 };
 }
